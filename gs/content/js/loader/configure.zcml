@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<configure xmlns="http://namespaces.zope.org/zope"
+  xmlns:browser="http://namespaces.zope.org/browser"
+  xmlns:five="http://namespaces.zope.org/five">
+
+  <browser:resource
+    name="gs-content-js-loader-20130111.js"
+    file="browser/javascript/loader.js"
+    permission="zope2.Public" />
+
+</configure>
