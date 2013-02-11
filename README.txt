@@ -1,30 +1,56 @@
 Introduction
 ============
 
-This module contains some Bootstrap_ `browser resources`_ for
-Zope_. It was originally developed for GroupServer_ (hence the ``gs.``
-name-space). However, it is completely devoid of anything that is specific
-to GroupServer: any Zope or Plone_ project should be able to make use of
-this egg.
+This module contains a dynamic JavaScript loader_. It allows modules to be
+loaded *from* *JavaScript*, rather than having the dependencies written in
+HTML ``script`` elements. It is based on the ideas of others (see
+Acknowledgements_ below), but it mainly differs from prior work in that it
+keeps track of a **global** list of loaded scripts.
 
-Browser Resources
-=================
+While originally written for GroupServer_, there is nothing specific to
+GroupServer in this product.
 
-``/++resource++bootstrap-2.2.2/``:
-  The directory-resource that contains all the Bootstrap JS (``js/``) and
-  images (``img/``).
+Loader
+======
+
+There are two forms of the loader: the `single resource`_ loader and the
+`multiple resource`_ loader.
+
+Single Resource
+---------------
+
+**Example**::
+
+    gsJsLoader.with_module('/++resource++gs-search-base-js-20121217.js', 
+                            init_topic_search);
+
+Multiple Resource
+-----------------
+
+**TODO**
+
+**Example**::
+
+  gsJsLoader.with_modules(['/foo.js', '/bar.js'], my_code);
+
+Acknowledgements
+================
+
+The `single resource`_ code was based on two jQuery loaders, from `CSS
+Tricks`_ and the blog by `Joel Varty`_. The `multiple resource`_ code was based on the `Async Script Loader with
+Callback`_ from CSS Tricks.
+
+.. _CSS Tricks: http://css-tricks.com/snippets/jquery/load-jquery-only-if-not-present/
+.. _Joel Varty: http://weblogs.asp.net/joelvarty/archive/2009/05/07/load-jquery-dynamically.aspx
+.. _Async Script Loader with Callback: http://css-tricks.com/snippets/javascript/async-script-loader-with-callback/
 
 Resources
 =========
 
-- Code repository: https://source.iopen.net/groupserver/gs.content.js.bootstrap/
+- Code repository: https://source.iopen.net/groupserver/gs.content.js.loader/
 - Questions and comments to http://groupserver.org/groups/development/
 - Report bugs at https://redmine.iopen.net/projects/groupserver/
 
-.. _Bootstrap: http://twitter.github.com/bootstrap/
 .. _GroupServer: http://groupserver.org/
-.. _jQuery.UI: http://jqueryui.com/
-.. _Plone: http://plone.org/
-.. _Zope: http://zope.org/
 
 ..  LocalWords:  jQuery UI Plone
