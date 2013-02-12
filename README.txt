@@ -1,12 +1,12 @@
 Introduction
 ============
 
-This module contains a dynamic JavaScript module loader_. It allows modules
-to be loaded *from* *JavaScript*, rather than having the dependencies
-written in HTML ``script`` elements. It is based on the ideas of others
-(see Acknowledgements_ below), but it mainly differs from prior work in
-that it keeps track of a **global** list of loaded scripts. The reason for
-this is the odd way that GroupServer_ is written.
+This module contains a dynamic JavaScript module loader_ as a Zope
+resource_. It allows modules to be loaded *from* *JavaScript*, rather than
+having the dependencies written in HTML ``script`` elements. It is based on
+the ideas of others (see Acknowledgements_ below), but it mainly differs
+from prior work in that it keeps track of a **global** list of loaded
+scripts. The reason for this is the odd way that GroupServer_ is written.
 
 In GroupServer a page may be made up of multiple components, called
 *viewlets,* that are quite separate from each other. A common pattern is
@@ -21,15 +21,12 @@ Finally, the getScript_ function from jQuery performs a similar role to the
 loader_ presented here. Most people should use ``getScript`` as I am sure
 that it is better written and better maintained.
 
-.. _getScript: http://api.jquery.com/jQuery.getScript/
-
-
 Loader
 ======
 
 The with_ method of the ``gsJsLoader`` object loads one or more resources
 and runs a function afterwards. The global ``gsJsLoader`` object keeps
-track of what is loaded.
+track of what is loaded. Introspection is provided by the `loaded`_ method.
 
 ``with``
 --------
@@ -56,8 +53,32 @@ Arguments
   argument then the function is executed after all the modules have been
   loaded.
 
-Example
+Returns
 ~~~~~~~
+
+Nothing.
+
+Side Effects
+~~~~~~~~~~~~
+
+* If the module has not been loaded and not been requested:
+
+  + Inserts ``<script>`` elements into the ``<head>`` of the document, to
+    cause the module or modules specified in ``url`` to load.
+
+  + Connects the ``function`` to the ``load`` (or ``onload`` for older
+    versions of Internet Explorer) callback of the ``<script>``.
+
+* If the module has been requested, but has not been loaded:
+
+  + Connects the ``function`` to the ``load`` callback of the ``<script>``.
+
+* If the module has been loaded:
+
+  + Calls the ``function``.
+
+Examples
+~~~~~~~~
 
 Run the function ``init_topic_search`` with the base search code::
 
@@ -70,9 +91,6 @@ Load two modules, jQuery_ and then Bootstrap_. Execute the function
   gsJsLoader.with(['/++resource++jquery-1.8.3.js', 
                    '/++resource++bootstrap-2.2.2/js/bootstrap.js'], 
                    my_code);
-
-.. _jQuery: http://jquery.com/
-.. _Bootstrap: http://twitter.github.com/bootstrap/
 
 Wait for the window to load, then initialise the post searching
 code. Detect and support loading if we are using a version of Microsoft
@@ -92,16 +110,63 @@ method::
       });
   }
 
+The same call as above, but using jQuery to attach to the ``load`` event::
+
+  jQuery(window).load(function () {
+            gsJsLoader.with('/++resource++gs-search-base-js-20121217.js',
+                            init_post_search);
+   });
+
+(This module is devoid of jQuery code, so it can be used to *load* jQuery.)
+
+``loaded``
+----------
+
+Test if a module has been loaded.
+
+Synopsis
+~~~~~~~~
+
+::
+
+  gsJsLoader.loaded(URL);
+
+Arguments
+~~~~~~~~~
+
+``url``:
+  The URL of the module to test.
+
+Returns
+~~~~~~~
+
+A Boolean: ``true`` if the module has been loaded; ``false`` if the
+module has is *being* loaded or has not been requested.
+
+Side Effects
+~~~~~~~~~~~~
+
+None.
+
+Resource
+========
+
+This product provides a JavaScript module as a Zope_ `browser
+resource`_. Any Zope or Plone_ project should be able to use this product
+as-is by placing the following line in a page template::
+
+    <script type="text/javascript" 
+            src="/++resource++gs-content-js-loader-20130111.js"> </script>
+
+Users of other systems are invited to copy the file
+``gs/content/js/loader/browser/javascript/loader.js`` out of this product.
+
 Acknowledgements
 ================
 
 The Loader_ code was based on two jQuery loaders, from `CSS Tricks`_ and
 the blog by `Joel Varty`_. The code to load multiple modules was based on
 the `Async Script Loader with Callback`_ from CSS Tricks.
-
-.. _CSS Tricks: http://css-tricks.com/snippets/jquery/load-jquery-only-if-not-present/
-.. _Joel Varty: http://weblogs.asp.net/joelvarty/archive/2009/05/07/load-jquery-dynamically.aspx
-.. _Async Script Loader with Callback: http://css-tricks.com/snippets/javascript/async-script-loader-with-callback/
 
 Resources
 =========
@@ -111,5 +176,15 @@ Resources
 - Report bugs at https://redmine.iopen.net/projects/groupserver/
 
 .. _GroupServer: http://groupserver.org/
+.. _getScript: http://api.jquery.com/jQuery.getScript/
+.. _Zope: http://zope.org/
+.. _browser resource: http://docs.zope.org/zope.browserresource/
+.. _Plone: http://plone.org
+.. _jQuery: http://jquery.com/
+.. _Bootstrap: http://twitter.github.com/bootstrap/
+.. _CSS Tricks: http://css-tricks.com/snippets/jquery/load-jquery-only-if-not-present/
+.. _Joel Varty: http://weblogs.asp.net/joelvarty/archive/2009/05/07/load-jquery-dynamically.aspx
+.. _Async Script Loader with Callback: http://css-tricks.com/snippets/javascript/async-script-loader-with-callback/
+
 
 ..  LocalWords:  jQuery UI Plone
