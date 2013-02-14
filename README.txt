@@ -220,6 +220,12 @@ as-is by placing the following line in a page template::
 Users of other systems are invited to copy the file
 ``gs/content/js/loader/browser/javascript/loader.js`` out of this product.
 
+A minified version of the module is also provided::
+
+    <script type="text/javascript" 
+            src="/++resource++gs-content-js-loader-20130111.js"> </script>
+
+
 Acknowledgements
 ================
 
@@ -246,4 +252,4 @@ Resources
 .. _Async Script Loader with Callback: http://css-tricks.com/snippets/javascript/async-script-loader-with-callback/
 
 
-..  LocalWords:  jQuery UI Plone
+..  LocalWords:  jQuery UI Plone minified

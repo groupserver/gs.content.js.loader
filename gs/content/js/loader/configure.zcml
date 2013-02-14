@@ -7,5 +7,9 @@
     name="gs-content-js-loader-20130111.js"
     file="browser/javascript/loader.js"
     permission="zope2.Public" />
+  <browser:resource
+    name="gs-content-js-loader-min-20130111.js"
+    file="browser/javascript/loader-min.js"
+    permission="zope2.Public" />
 
 </configure>
