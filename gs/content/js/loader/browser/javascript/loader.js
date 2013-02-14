@@ -15,7 +15,7 @@ function GSSequentialJSLoader(loader) {
         var script = null;
         if (toLoad.length > 0) {
             script = toLoad.pop();
-            globalLoader.with(script, load);
+            globalLoader.with_module(script, load);
         } else if ((toLoad.length == 0) && gs_is_function(origCallback)) {
             origCallback.call();
         }
@@ -124,7 +124,9 @@ function GSJSLoader() {
     // Public Methods
     return {
         loaded: function(url) {return script_loaded(url);},
-        with: function(url, callback) {
+        loading: function(url) {return script_loading(url);},
+        exists: function(url) {return script_exists(url);},
+        with_module: function(url, callback) {
             var m = null;
             if (typeof url === 'string') {
                 load_module(url, callback);
