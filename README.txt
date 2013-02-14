@@ -24,12 +24,13 @@ that it is better written and better maintained.
 Loader
 ======
 
-The with_ method of the ``gsJsLoader`` object loads one or more resources
-and runs a function afterwards. The global ``gsJsLoader`` object keeps
-track of what is loaded. Introspection is provided by the `loaded`_ method.
+The `with_module`_ method of the ``gsJsLoader`` object loads one or more
+resources and runs a function afterwards. The global ``gsJsLoader`` object
+keeps track of what is loaded. Introspection is provided by the loaded_,
+loading_ and exists_ methods.
 
-``with``
---------
+``with_module``
+---------------
 
 *With* some *modules* run a *function.*
 
@@ -38,7 +39,7 @@ Synopsis
 
 ::
 
-  gsJsLoader.with(URL | [URL₁, URL₂… URLₙ], function);
+  gsJsLoader.with_module(URL | [URL₁, URL₂… URLₙ], function);
 
 Arguments
 ~~~~~~~~~
@@ -82,15 +83,15 @@ Examples
 
 Run the function ``init_topic_search`` with the base search code::
 
-    gsJsLoader.with('/++resource++gs-search-base-js-20121217.js', 
-                    init_topic_search);
+    gsJsLoader.with_module('/++resource++gs-search-base-js-20121217.js', 
+                           init_topic_search);
 
 Load two modules, jQuery_ and then Bootstrap_. Execute the function
 ``my_code`` after both modules have been loaded.::
 
-  gsJsLoader.with(['/++resource++jquery-1.8.3.js', 
-                   '/++resource++bootstrap-2.2.2/js/bootstrap.js'], 
-                   my_code);
+  gsJsLoader.with_module(['/++resource++jquery-1.8.3.js', 
+                          '/++resource++bootstrap-2.2.2/js/bootstrap.js'], 
+                         my_code);
 
 Wait for the window to load, then initialise the post searching
 code. Detect and support loading if we are using a version of Microsoft
@@ -99,22 +100,22 @@ method::
 
   if (window.addEventListener) {
       window.addEventListener('load', function () {
-          gsJsLoader.with('/++resource++gs-search-base-js-20121217.js',
-                          init_post_search);
+          gsJsLoader.with_module('/++resource++gs-search-base-js-20121217.js',
+                                 init_post_search);
       }, false);
   
   } else {
       window.attachEvent('onload', function () {
-          gsJsLoader.with('/++resource++gs-search-base-js-20121217.js',
-                          init_post_search);
+          gsJsLoader.with_module('/++resource++gs-search-base-js-20121217.js',
+                                 init_post_search);
       });
   }
 
 The same call as above, but using jQuery to attach to the ``load`` event::
 
   jQuery(window).load(function () {
-            gsJsLoader.with('/++resource++gs-search-base-js-20121217.js',
-                            init_post_search);
+            gsJsLoader.with_module('/++resource++gs-search-base-js-20121217.js',
+                                   init_post_search);
    });
 
 (This module is devoid of jQuery code, so it can be used to *load* jQuery.)
@@ -122,7 +123,7 @@ The same call as above, but using jQuery to attach to the ``load`` event::
 ``loaded``
 ----------
 
-Test if a module has been loaded.
+Test if a module has been loaded (past-tense).
 
 Synopsis
 ~~~~~~~~
@@ -142,6 +143,64 @@ Returns
 
 A Boolean: ``true`` if the module has been loaded; ``false`` if the
 module has is *being* loaded or has not been requested.
+
+Side Effects
+~~~~~~~~~~~~
+
+None.
+
+``loading``
+------------
+
+Test if a module is being loaded (present continuous tense).
+
+Synopsis
+~~~~~~~~
+
+::
+
+  gsJsLoader.loading(URL);
+
+Arguments
+~~~~~~~~~
+
+``url``:
+  The URL of the module to test.
+
+Returns
+~~~~~~~
+
+A Boolean: ``true`` if the module is being loaded; ``false`` if the
+module has *been* loaded or has not been requested.
+
+Side Effects
+~~~~~~~~~~~~
+
+None.
+
+``exists``
+----------
+
+Test if a module is known.
+
+Synopsis
+~~~~~~~~
+
+::
+
+  gsJsLoader.known(URL);
+
+Arguments
+~~~~~~~~~
+
+``url``:
+  The URL of the module to test.
+
+Returns
+~~~~~~~
+
+A Boolean: ``true`` if the module has being loaded or has been requested;
+``false`` otherwise.
 
 Side Effects
 ~~~~~~~~~~~~
