@@ -132,7 +132,7 @@ function GSJSLoader() {
                 load_module(url, callback);
             } else {
                 m = new GSSequentialJSLoader(this);
-                m.load_modules(scripts, callback);
+                m.load_modules(url, callback);
             }
         }
     }
