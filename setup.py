@@ -18,7 +18,7 @@ setup(name='gs.content.js.loader',
         'License :: OSI Approved :: Zope Public License',
         "Natural Language :: English",
         "Operating System :: POSIX :: Linux"
-        "Programming Language :: Python",
+        "Programming Language :: JavaScript",
         "Topic :: Software Development :: Libraries :: Python Modules",
       ],
     keywords='javascript Loader async',
