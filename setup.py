@@ -17,10 +17,10 @@ setup(name='gs.content.js.loader',
         "Intended Audience :: Developers",
         'License :: OSI Approved :: Zope Public License',
         "Natural Language :: English",
-        "Operating System :: POSIX :: Linux"
+        "Operating System :: OS Independent"
         "Programming Language :: JavaScript",
-        "Topic :: Software Development :: Libraries :: Python Modules",
-      ],
+        "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
+    ],
     keywords='javascript Loader async',
     author='Michael JasonSmith',
     author_email='mpj17@onlinegroups.net',
