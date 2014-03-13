@@ -1,3 +1,6 @@
+"use strict";
+// Lazy JavaScript loader.
+//
 // Copyright © 2014 OnlineGroups.net and Contributors.
 // All Rights Reserved.
 //
