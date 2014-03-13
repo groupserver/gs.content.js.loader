@@ -1,14 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- Copyright © 2013, 2014 OnlineGroups.net and Contributors. -->
+<!-- All Rights Reserved. -->
+
+<!-- This software is subject to the provisions of the Zope Public -->
+<!-- License, Version 2.1 (ZPL).  A copy of the ZPL should accompany this -->
+<!-- distribution. -->
+
+<!-- THIS SOFTWARE IS PROVIDED "AS IS" AND ANY AND ALL EXPRESS OR IMPLIED -->
+<!-- WARRANTIES ARE DISCLAIMED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED -->
+<!-- WARRANTIES OF TITLE, MERCHANTABILITY, AGAINST INFRINGEMENT, AND -->
+<!-- FITNESS FOR A PARTICULAR PURPOSE. -->
 <configure xmlns="http://namespaces.zope.org/zope"
-  xmlns:browser="http://namespaces.zope.org/browser"
-  xmlns:five="http://namespaces.zope.org/five">
+           xmlns:browser="http://namespaces.zope.org/browser">
 
   <browser:resource
-    name="gs-content-js-loader-20130111.js"
+    name="gs-content-js-loader-20140313.js"
     file="browser/javascript/loader.js"
     permission="zope2.Public" />
   <browser:resource
-    name="gs-content-js-loader-min-20130111.js"
+    name="gs-content-js-loader-min-20140313.js"
     file="browser/javascript/loader-min.js"
     permission="zope2.Public" />
 

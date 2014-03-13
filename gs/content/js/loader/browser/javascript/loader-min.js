@@ -11,4 +11,4 @@ k=(typeof g[l]!=="undefined");return k}function h(l){var k=null;k=(b(l)||f(l));r
 }else{if(f(l)){i(l,m)}else{k=a(l,m);c(k);g[l]=k}}}return{loaded:function(k){return b(k)
 },loading:function(k){return f(k)},exists:function(k){return h(k)},with_module:function(l,n){var k=null;
 if(typeof l==="string"){j(l,n)}else{k=new GSSequentialJSLoader(this);k.load_modules(l,n)
-}}}}var gsJsLoader=GSJSLoader();
+}}}}var gsJsLoader=null;gsJsLoader=GSJSLoader();
