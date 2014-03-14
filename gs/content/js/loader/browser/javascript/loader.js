@@ -78,7 +78,15 @@ function GSJSLoader() {
         e.type = "text/javascript";
         e.src = url;
         e.async = true;
-        e.onload = load_handler(url, e, callback);
+        // Add the listner. Pattern from Microsoft:
+        // http://msdn.microsoft.com/en-us/library/ie/hh180173%28v=vs.85%29.aspx
+        if (e.addEventListener) {
+            // Standards compliant (IE > 8)
+            e.addEventListener('load', callback, false);
+        } else if (e.readyState) {
+            // IE < 9
+            e.onreadystatechange = callback;
+        }
         return e;
     }
 
@@ -112,9 +120,11 @@ function GSJSLoader() {
         if (gs_is_function(callback)) {
             script = scriptsLoading[url];
             if (script.addEventListener) {
+                // Standards compliant
                 script.addEventListener('load', callback, false);
-            } else {
-                window.attachEvent('onload', callback);
+            } else if (script.readyState) {
+                // IE < 9
+                script.attachEvent("onreadystatechange", callback);
             }
         }
     }
