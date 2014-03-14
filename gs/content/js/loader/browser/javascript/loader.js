@@ -73,19 +73,20 @@ function GSJSLoader() {
     function create_script_element(url, callback) {
         // Create a <script> element, that loads "src" and calls the "callback"
         // when it is loaded
-        var e=null;
+        var e=null, callbackClosure=null;
         e = document.createElement('script');
         e.type = "text/javascript";
         e.src = url;
         e.async = true;
+        callbackClosure = load_handler(url, e, callback);
         // Add the listner. Pattern from Microsoft:
         // http://msdn.microsoft.com/en-us/library/ie/hh180173%28v=vs.85%29.aspx
         if (e.addEventListener) {
             // Standards compliant (IE > 8)
-            e.addEventListener('load', callback, false);
+            e.addEventListener('load', callbackClosure, false);
         } else if (e.readyState) {
             // IE < 9
-            e.onreadystatechange = callback;
+            e.onreadystatechange = callbackClosure;
         }
         return e;
     }
