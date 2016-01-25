@@ -12,6 +12,7 @@
 # FOR A PARTICULAR PURPOSE.
 #
 ##############################################################################
+import codecs
 import os
 from setuptools import setup, find_packages
 from version import get_version
@@ -19,12 +20,17 @@ from version import get_version
 name = 'gs.content.js.loader'
 version = get_version()
 
+with codecs.open('README.rst', encoding='utf-8') as f:
+    long_description = f.read()
+with codecs.open(os.path.join("docs", "HISTORY.rst"),
+                 encoding='utf-8') as f:
+    long_description += '\n' + f.read()
+
 setup(
     name=name,
     version=version,
     description="Dynamic JavaScript Loader Code for Zope.",
-    long_description=open("README.rst").read() + "\n" +
-                      open(os.path.join("docs", "HISTORY.rst")).read(),
+    long_description=long_description,
     classifiers=[
         'Development Status :: 5 - Production/Stable',
         "Environment :: Web Environment",
