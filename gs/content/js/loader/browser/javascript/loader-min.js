@@ -1,17 +1,3 @@
-"use strict";function gs_is_function(b){var a=null;a=(b&&(typeof(b)==="function"));
-return a}function GSSequentialJSLoader(a){var e=a,b=null,c=null;function d(){var f=null;
-if(c.length>0){f=c.pop();e.with_module(f,d)}else{if((c.length==0)&&gs_is_function(b)){b.call()
-}}}return{load_modules:function(f,g){c=f;c.reverse();b=g;d()}}}function GSJSLoader(){var d={},g={};
-function e(l,k,m){return function(n){d[l]=k;delete g[l];if(gs_is_function(m)){m.call()
-}}}function a(k,n){var m=null,l=null;m=document.createElement("script");m.type="text/javascript";
-m.src=k;m.async=true;l=e(k,m,n);if(m.addEventListener){m.addEventListener("load",l,false)
-}else{if(m.readyState){m.onreadystatechange=l}}return m}function c(k){var l=null;
-l=document.getElementsByTagName("head")[0];l.appendChild(k)}function b(l){var k=null;
-k=(typeof d[l]!=="undefined");return k}function f(l){var k=null;k=(typeof g[l]!=="undefined");
-return k}function h(l){var k=null;k=(b(l)||f(l));return k}function i(l,m){var k=null;
-if(gs_is_function(m)){k=g[l];if(k.addEventListener){k.addEventListener("load",m,false)
-}else{if(k.readyState){k.attachEvent("onreadystatechange",m)}}}}function j(l,m){var k=null;
-if(b(l)){m.call()}else{if(f(l)){i(l,m)}else{k=a(l,m);c(k);g[l]=k}}}return{loaded:function(k){return b(k)
-},loading:function(k){return f(k)},exists:function(k){return h(k)},with_module:function(l,n){var k=null;
-if(typeof l==="string"){j(l,n)}else{k=new GSSequentialJSLoader(this);k.load_modules(l,n)
-}}}}var gsJsLoader=null;gsJsLoader=GSJSLoader();
+'use strict';function gs_is_function(f){return f&&"function"===typeof f}function GSSequentialJSLoader(f){function g(){var a=null;0<e.length?(a=e.pop(),h.with_module(a,g)):0==e.length&&gs_is_function(d)&&d.call()}var h=f,d=null,e=null;return{load_modules:function(a,c){e=a;e.reverse();d=c;g()}}}
+function GSJSLoader(){function f(a,c,b){return function(f){d[a]=c;delete e[a];gs_is_function(b)&&b.call()}}function g(a){var c=null;return c="undefined"!==typeof d[a]}function h(a){var c=null;return c="undefined"!==typeof e[a]}var d={},e={};return{loaded:function(a){return g(a)},loading:function(a){return h(a)},exists:function(a){var c=null;return c=g(a)||h(a)},with_module:function(a,c){var b=null;if("string"===typeof a)if(b=null,g(a))c.call();else if(h(a))b=null,gs_is_function(c)&&(b=e[a],b.addEventListener?
+b.addEventListener("load",c,!1):b.readyState&&b.attachEvent("onreadystatechange",c));else{var d=b=null,b=document.createElement("script");b.type="text/javascript";b.src=a;b.async=!0;d=f(a,b,c);b.addEventListener?b.addEventListener("load",d,!1):b.readyState&&(b.onreadystatechange=d);var d=b,k=null,k=document.getElementsByTagName("head")[0];k.appendChild(d);e[a]=b}else b=new GSSequentialJSLoader(this),b.load_modules(a,c)}}}var gsJsLoader=null,gsJsLoader=GSJSLoader();
