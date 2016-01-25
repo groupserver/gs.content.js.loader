@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 // Lazy JavaScript loader.
 //
 // Copyright © 2014 OnlineGroups.net and Contributors.
@@ -12,17 +12,17 @@
 // WARRANTIES OF TITLE, MERCHANTABILITY, AGAINST INFRINGEMENT, AND
 // FITNESS FOR A PARTICULAR PURPOSE.
 
-// Load a script. jQuery could be one of the scripts that we could be 
+// Load a script. jQuery could be one of the scripts that we could be
 // loading, so everything here uses the core DOM methods.
 function gs_is_function(f) {
-        var retval=null;
-        retval = (f && (typeof(f) === "function"));
+        var retval = null;
+        retval = (f && (typeof(f) === 'function'));
         return retval;
 }
 
 
 function GSSequentialJSLoader(loader) {
-    var globalLoader=loader, origCallback=null, toLoad=null;
+    var globalLoader = loader, origCallback = null, toLoad = null;
 
     function load() {
         var script = null;
@@ -52,12 +52,12 @@ function GSJSLoader() {
     //
 
     // The dictionary of scripts we have loaded, as (URL, element) pairs.
-    var scripts={}, scriptsLoading={};
+    var scripts = {}, scriptsLoading = {};
 
     //
     // Private methods
     //
-    
+
     function load_handler(url, script, callback) {
         // A closure around a function factory. Thanks slebetman
         // http://stackoverflow.com/questions/1997531/javascript-callback-function-and-parameters
@@ -73,9 +73,9 @@ function GSJSLoader() {
     function create_script_element(url, callback) {
         // Create a <script> element, that loads "src" and calls the "callback"
         // when it is loaded
-        var e=null, callbackClosure=null;
+        var e = null, callbackClosure = null;
         e = document.createElement('script');
-        e.type = "text/javascript";
+        e.type = 'text/javascript';
         e.src = url;
         e.async = true;
         callbackClosure = load_handler(url, e, callback);
@@ -93,31 +93,31 @@ function GSJSLoader() {
 
     function add_script(script) {
         // Add the "script" to the <head> of the document.
-        var head=null;
+        var head = null;
         head = document.getElementsByTagName('head')[0];
         head.appendChild(script);
     }
 
     function script_loaded(url) {
-        var retval=null;
-        retval = (typeof scripts[url] !== "undefined");
+        var retval = null;
+        retval = (typeof scripts[url] !== 'undefined');
         return retval;
     }
 
     function script_loading(url) {
-        var retval=null;
-        retval = (typeof scriptsLoading[url] !== "undefined");
+        var retval = null;
+        retval = (typeof scriptsLoading[url] !== 'undefined');
         return retval;
     }
 
     function script_exists(url) {
-        var retval=null;
+        var retval = null;
         retval = (script_loaded(url) || script_loading(url));
-        return retval
+        return retval;
     }
 
     function attach_onload_callback(url, callback) {
-        var script=null;
+        var script = null;
         if (gs_is_function(callback)) {
             script = scriptsLoading[url];
             if (script.addEventListener) {
@@ -125,7 +125,7 @@ function GSJSLoader() {
                 script.addEventListener('load', callback, false);
             } else if (script.readyState) {
                 // IE < 9
-                script.attachEvent("onreadystatechange", callback);
+                script.attachEvent('onreadystatechange', callback);
             }
         }
     }
@@ -133,7 +133,7 @@ function GSJSLoader() {
     function load_module(url, callback) {
         // Run the function in "callback", ensuring that the module in
         // "url" is loaded first.
-        var script=null;
+        var script = null;
         if (script_loaded(url)) {
             callback.call();
         } else if (script_loading(url)) {
@@ -151,7 +151,7 @@ function GSJSLoader() {
         loading: function(url) {return script_loading(url);},
         exists: function(url) {return script_exists(url);},
         with_module: function(url, callback) {
-            var m=null;
+            var m = null;
             if (typeof url === 'string') {
                 load_module(url, callback);
             } else {
@@ -159,8 +159,9 @@ function GSJSLoader() {
                 m.load_modules(url, callback);
             }
         }
-    }
+    };
 } // GSJSLoader
 
-var gsJsLoader=null;
+var gsJsLoader = null;
 gsJsLoader = GSJSLoader();
+
