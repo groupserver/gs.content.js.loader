@@ -11,7 +11,7 @@ Changelog
 * Using GitHub_ as the canonical repository
 
 .. _Read the Docs:
-   http://groupserver.readthedocs.org/projects/gscontentjsloader
+   http://groupserver.readthedocs.io/projects/gscontentjsloader
 .. _GitHub: https://github.com/groupserver/gs.content.js.loader
 
 1.0.5 (2014-03-14)
