@@ -52,7 +52,7 @@ Resources
 =========
 
 - Documentation:
-  http://groupserver.readthedocs.org/projects/gscontentjsloader
+  http://groupserver.readthedocs.io/projects/gscontentjsloader
 - Code repository:
   https://github.com/groupserver/gs.content.js.loader/
 - Questions and comments to
